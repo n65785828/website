@@ -19,4 +19,9 @@ public class IndexController {
     public String tableBasic(){
         return "table-basic";
     }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "page-login";
+    }
 }
