@@ -8,14 +8,26 @@
 <div class="nk-sidebar" th:fragment="side">
     <div class="nk-nav-scroll">
         <ul class="metismenu" id="menu">
-            <li class="nav-label">Dashboard</li>
+            <li th:each="menu:${menuPermission}" class="mega-menu mega-menu-sm">
+                <a th:if="${child.type} eq 0" class="has-arrow" href="javascript:void(0)" aria-expanded="false">
+                    <i th:class="${menu.icon}" ></i><span class="nav-text" th:text="${menu.name}"></span>
+                </a>
+                <a th:if="${child.type} eq 1" class="has-arrow" th:href="${child.url}" aria-expanded="false">
+                    <i th:class="${menu.icon}" ></i><span class="nav-text" th:text="${menu.name}"></span>
+                </a>
+                <ul aria-expanded="false" th:if="${not #lists.isEmpty(menu.children)}">
+                    <li th:each="child :${menu.children}"><a th:href="${child.url}" th:text="${child.name}"></a></li>
+                </ul>
+            </li>
+
+ <!--           <li class="nav-label">Dashboard</li>
             <li>
                 <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="./index.html">Home 1</a></li>
-                    <!-- <li><a href="./index-2.html">Home 2</a></li> -->
+                    <li><a href="/index">Home</a></li>
+                    &lt;!&ndash; <li><a href="./index-2.html">Home 2</a></li> &ndash;&gt;
                 </ul>
             </li>
             <li class="mega-menu mega-menu-sm">
@@ -92,13 +104,13 @@
                     <li><a href="./ui-progressbar.html">Progressbar</a></li>
                     <li><a href="./ui-tab.html">Tab</a></li>
                     <li><a href="./ui-typography.html">Typography</a></li>
-                    <!-- </ul>
+                    &lt;!&ndash; </ul>
                 </li>
                 <li>
                     <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                     </a>
-                    <ul aria-expanded="false"> -->
+                    <ul aria-expanded="false"> &ndash;&gt;
                     <li><a href="./uc-nestedable.html">Nestedable</a></li>
                     <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
                     <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
@@ -152,7 +164,8 @@
                         </ul>
                     </li>
                 </ul>
-            </li>
+            </li>-->
+
         </ul>
     </div>
 </div>
