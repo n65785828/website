@@ -9,10 +9,10 @@
     <div class="nk-nav-scroll">
         <ul class="metismenu" id="menu">
             <li th:each="menu:${menuPermission}" class="mega-menu mega-menu-sm">
-                <a th:if="${child.type} eq 0" class="has-arrow" href="javascript:void(0)" aria-expanded="false">
+                <a th:if="${menu.type} eq 0" class="has-arrow" href="javascript:void(0)" aria-expanded="false">
                     <i th:class="${menu.icon}" ></i><span class="nav-text" th:text="${menu.name}"></span>
                 </a>
-                <a th:if="${child.type} eq 1" class="has-arrow" th:href="${child.url}" aria-expanded="false">
+                <a th:if="${menu.type} eq 1" th:href="${menu.url}" aria-expanded="false">
                     <i th:class="${menu.icon}" ></i><span class="nav-text" th:text="${menu.name}"></span>
                 </a>
                 <ul aria-expanded="false" th:if="${not #lists.isEmpty(menu.children)}">
