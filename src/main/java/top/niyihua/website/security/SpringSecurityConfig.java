@@ -42,6 +42,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")//登录页面
+                .failureUrl("/login?error=true")//登录错误跳转
+                .defaultSuccessUrl("/",true)
                 .loginProcessingUrl("/userLogin")//登录接口
                 .permitAll()
                 .and()
