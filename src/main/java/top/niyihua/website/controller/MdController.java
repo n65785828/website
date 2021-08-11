@@ -32,7 +32,8 @@ public class MdController extends BaseController{
 
     @RequestMapping({"/add"})
     public String menuManage(Model model) {
-        return "/layui/md/main";
+        allPermission(model);
+        return "md-add";
     }
 
     @RequestMapping({"/articles"})
@@ -47,37 +48,23 @@ public class MdController extends BaseController{
         return article.getContext();
     }
 
-    @RequestMapping({"/articles/list"})
-    @ResponseBody
-    public Map<String, Object> listArticles(Model model) throws IOException {
-        Map<String, Object> resultMap = new HashMap();
-        List<Article> article = articleRepo.findAll();
-        resultMap.put("code", 0);
-        resultMap.put("msg", "");
-        resultMap.put("count", article.size());
-        resultMap.put("data", article);
-        return resultMap;
-    }
-
     @RequestMapping({"/articles/add"})
-    @ResponseBody
-    public String add(Article article)  {
+    public String add(Article article,Model model)  {
         article.setId(UUID.randomUUID().toString().replace("-", ""));
         article.setCreateTime(LocalDateTime.now());
         article.setUpdateTime(LocalDateTime.now());
         articleRepo.save(article);
-        return "{\"result\":\"success\"}";
+        return index(model);
     }
 
     @RequestMapping({"/articles/delete/{id}"})
-    @ResponseBody
-    public String delete(@PathVariable("id") String id) throws IOException {
+    public String delete(@PathVariable("id") String id,Model model){
         articleRepo.deleteById(id);
-        return "{\"result\":\"success\"}";
+        return index(model);
     }
 
     @RequestMapping({"/index"})
-    public String index(Model model) throws IOException {
+    public String index(Model model){
         allPermission(model);
         Map<String, Object> resultMap = new HashMap();
         List<Article> article = articleRepo.findAll();
